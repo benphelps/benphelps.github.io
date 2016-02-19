@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Driveway Camera</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
+    <style media="screen">
+      html, body {
+        font-family: 'Roboto Mono', monospace;
+        padding: 0px;
+        margin: 0px;
+        width: 640px;
+        height: 480px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="http://192.168.1.137/snapshot.cgi?user=view&pwd=pass" alt="" id="camera" />
+    <script type="text/javascript">
+      var image = document.getElementById('camera');
+      var start = new Date().getTime();
+      var req = 0;
+      var frames = 0;
+      var fps = 0;
+
+      function updateImage() {
+        image.src = "http://192.168.1.137/snapshot.cgi?user=view&pwd=pass&" + new Date().getTime();
+        frames += 1;
+      }
+
+      image.addEventListener('load', function() {
+        req = new Date().getTime();
+        fps = ((req - start) / frames).toFixed(0);
+        updateImage();
+      });
+
+    </script>
+  </body>
+</html>
