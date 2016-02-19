@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Driveway Camera</title>
+    <title>Driveway</title>
+    <script src="moment.js" charset="utf-8"></script>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700' rel='stylesheet' type='text/css'>
     <style media="screen">
       html, body {
@@ -11,29 +12,52 @@
         margin: 0px;
         width: 640px;
         height: 480px;
+        overflow: hidden;
+        font-weight: bold;
+        color: #FFF;
+        text-shadow: 1px 1px 1px #000;
+      }
+      #fps {
+        position: absolute;
+        top: 440px;
+        left: 550px;
+      }
+      #date {
+        position: absolute;
+        top: 440px;
+        left: 20px;
+      }
+      #title {
+        position: absolute;
+        top: 20px;
+        left: 20px;
       }
     </style>
   </head>
   <body>
+    <div id="title">Driveway</div>
+    <div id="fps"></div>
+    <div id="date"></div>
     <img src="http://192.168.1.137/snapshot.cgi?user=view&pwd=pass" alt="" id="camera" />
     <script type="text/javascript">
+      // Oh hello, this is just something for me, a viewer for my local IP camera.
+      // The default viewer is pretty terrible.
       var image = document.getElementById('camera');
+      var fpse = document.getElementById('fps');
+      var date = document.getElementById('date');
       var start = new Date().getTime();
-      var req = 0;
       var frames = 0;
       var fps = 0;
-
       function updateImage() {
         image.src = "http://192.168.1.137/snapshot.cgi?user=view&pwd=pass&" + new Date().getTime();
         frames += 1;
       }
-
       image.addEventListener('load', function() {
-        req = new Date().getTime();
-        fps = ((req - start) / frames).toFixed(0);
+        fps = (frames / ((new Date().getTime() - start) / 1000)).toFixed(0);
+        fpse.innerHTML = 'FPS: ' + fps;
+        date.innerHTML = moment().format('LTS');
         updateImage();
       });
-
     </script>
   </body>
 </html>
