@@ -7,7 +7,6 @@ html, body {
   overflow: hidden;
   font-weight: bold;
   color: #FFF;
-  text-shadow: 1px 1px 1px #000;
 }
 #camera {
   width: 100%;
@@ -17,14 +16,20 @@ html, body {
   position: absolute;
   bottom: 20px;
   right: 20px;
+  padding: 0px 4px 1px 4px;
+  background: rgba(0, 0, 0, 0.75);
 }
 #date {
   position: absolute;
   bottom: 20px;
   left: 20px;
+  padding: 0px 4px 1px 4px;
+  background: rgba(0, 0, 0, 0.75);
 }
 #title {
   position: absolute;
   top: 20px;
   left: 20px;
+  padding: 0px 4px 1px 4px;
+  background: rgba(0, 0, 0, 0.75);
 }
