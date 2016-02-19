@@ -2,20 +2,27 @@
 // The default viewer is pretty terrible.
 
 var image = document.getElementById('camera');
-var fpse = document.getElementById('fps');
+var fps = document.getElementById('fps');
 var date = document.getElementById('date');
-var start = new Date().getTime();
-var frames = 0;
-var fps = 0;
+var frame;
+var floating = [];
 
 // simple method to limit the request rate
 function updateImage() {
-  image.src = "http://192.168.1.137/snapshot.cgi?user=view&pwd=pass&" + new Date().getTime();
-  frames += 1;
+  frame = new Date().getTime();
+  image.src = "http://192.168.1.137/snapshot.cgi?user=view&pwd=pass&" + frame;
 }
+
+// Simple floating average to smooth out the FPS number
+function framesPerSecond() {
+  floating.unshift(Math.round( 1000 / (new Date().getTime() - frame), 0));
+  floating = floating.slice(0, 9);
+  return Math.round(floating.average(), 0);
+}
+
+// listen to the image load event and start a new request
 image.addEventListener('load', function() {
-  fps = (frames / ((new Date().getTime() - start) / 1000)).toFixed(0);
-  fpse.innerHTML = 'FPS: ' + fps;
+  fps.innerHTML = 'FPS: ' + framesPerSecond();
   date.innerHTML = moment().format('LTS');
   updateImage();
 });
