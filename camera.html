@@ -10,21 +10,25 @@
         font-family: 'Roboto Mono', monospace;
         padding: 0px;
         margin: 0px;
-        width: 640px;
-        height: 480px;
+        width: 100%;
+        height: 100%;
         overflow: hidden;
         font-weight: bold;
         color: #FFF;
         text-shadow: 1px 1px 1px #000;
       }
+      #camera {
+        width: 100%;
+        height: auto;
+      }
       #fps {
         position: absolute;
-        top: 440px;
-        left: 550px;
+        bottom: 20px;
+        right: 20px;
       }
       #date {
         position: absolute;
-        top: 440px;
+        bottom: 20px;
         left: 20px;
       }
       #title {
@@ -38,7 +42,7 @@
     <div id="title">Driveway</div>
     <div id="fps"></div>
     <div id="date"></div>
-    <img src="http://192.168.1.137/snapshot.cgi?user=view&pwd=pass" alt="" id="camera" />
+    <img src="http://192.168.1.137/snapshot.cgi?user=view&pwd=pass" id="camera" />
     <script type="text/javascript">
       // Oh hello, this is just something for me, a viewer for my local IP camera.
       // The default viewer is pretty terrible.
