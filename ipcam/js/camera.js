@@ -8,6 +8,7 @@ var fps = document.getElementById('fps');
 var date = document.getElementById('date');
 var frame, fps;
 var floating = [];
+var frames = [];
 var text;
 
 // simple method to limit the request rate
@@ -49,6 +50,11 @@ function framesPerSecond() {
   return Math.round(floating.average(), 0);
 }
 
+function storeFrames(limit) {
+  frames.unshift(canvas.toDataURL('image/webp', 1));
+  frames = frames.slice(0, limit);
+}
+
 // listen to the image load event and start a new request
 image.addEventListener('load', function() {
   fps = framesPerSecond();
@@ -56,7 +62,33 @@ image.addEventListener('load', function() {
   updateImage();
   drawText('FPS: ' + fps, 535, 440);
   drawText(moment().format('LTS'), 20, 440);
+  if (wlog) {
+    drawText(wlog, 20, 400);
+  }
+  storeFrames(fps * 60);
 });
+
+var worker = new Worker('js/gifworker.js');
+var wlog = false;
+
+// on click download last 1 min video
+document.getElementById('download').addEventListener('click', function() {
+  worker.postMessage([frames, fps]);
+}, false);
+
+// listen to the worker
+worker.addEventListener('message', function(e) {
+  if (e.data[0] == 's') {
+    wlog = e.data[1];
+  }
+  else {
+    url = window.URL.createObjectURL(e.data[0]);
+    var link = document.createElement("a");
+    link.download = moment().format('LTS') + '.webm';
+    link.href = url;
+    link.click();
+  }
+}, false);
 
 // start things going
 updateImage();
