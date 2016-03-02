@@ -10,6 +10,15 @@ var frame, fps;
 var floating = [];
 var frames = [];
 var text;
+var db = new Dexie('IPCamStore');
+
+db.version(1).stores({
+  videos: 'time, data'
+});
+
+db.open().catch(function(error){
+  alert('Uh oh : ' + error);
+});
 
 // simple method to limit the request rate
 function updateImage() {
@@ -52,7 +61,10 @@ function framesPerSecond() {
 
 function storeFrames(limit) {
   frames.unshift(canvas.toDataURL('image/webp', 1));
-  frames = frames.slice(0, limit);
+  if (frames.length >= limit) {
+    worker.postMessage([frames, fps]);
+    frames = [];
+  }
 }
 
 // listen to the image load event and start a new request
@@ -62,14 +74,10 @@ image.addEventListener('load', function() {
   updateImage();
   drawText('FPS: ' + fps, 535, 440);
   drawText(moment().format('LTS'), 20, 440);
-  if (wlog) {
-    drawText(wlog, 20, 400);
-  }
-  storeFrames(fps * 60);
+  storeFrames(fps * 10);
 });
 
 var worker = new Worker('js/gifworker.js');
-var wlog = false;
 
 // on click download last 1 min video
 document.getElementById('download').addEventListener('click', function() {
@@ -78,17 +86,21 @@ document.getElementById('download').addEventListener('click', function() {
 
 // listen to the worker
 worker.addEventListener('message', function(e) {
-  if (e.data[0] == 's') {
-    wlog = e.data[1];
-  }
-  else {
-    url = window.URL.createObjectURL(e.data[0]);
-    var link = document.createElement("a");
-    link.download = moment().format('LTS') + '.webm';
-    link.href = url;
-    link.click();
-  }
+  db.videos.add({ time: moment(new Date().getTime() - 60000).format('LTS'), data: window.URL.createObjectURL(e.data) });
 }, false);
+
+/*
+
+var link = document.createElement("a");
+link.download = moment().format('LTS') + '.webm';
+link.href = url;
+link.click();
+
+*/
+
+
+
+
 
 // start things going
 updateImage();
