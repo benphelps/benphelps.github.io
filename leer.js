@@ -139,7 +139,7 @@
 
     Client.prototype.username = 'phelps';
 
-    Client.prototype.room_id = 'zuMej9Yz';
+    Client.prototype.room_id = 'zuMej9Yaz';
 
     Client.prototype.room_ref = false;
 
