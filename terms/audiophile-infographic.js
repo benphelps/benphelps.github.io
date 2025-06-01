@@ -574,6 +574,7 @@ function filterTerms() {
       term.term.toLowerCase().includes(search) ||
       term.summary.toLowerCase().includes(search) ||
       term.shortExplanation.toLowerCase().includes(search) ||
+      term.detailedDescription.toLowerCase().includes(search) ||
       (term.tags &&
         term.tags.some((tag) => tag.toLowerCase().includes(search)));
     return matchesFilter && matchesSearch;
