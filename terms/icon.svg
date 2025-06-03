@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <!-- Gradient definitions matching the app's color scheme -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.8" />
+    </linearGradient>
+    
+    <!-- Glow filter -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Dark background circle -->
+  <circle cx="50" cy="50" r="48" fill="#0a0a0a" stroke="url(#primaryGradient)" stroke-width="2"/>
+  
+  <!-- Frequency response curve (stylized Harman curve) -->
+  <path d="M 15 65 Q 25 60, 35 62 Q 45 64, 55 58 Q 65 52, 75 55 Q 85 58, 95 60" 
+        stroke="url(#waveGradient)" 
+        stroke-width="2.5" 
+        fill="none" 
+        filter="url(#glow)"
+        opacity="0.9"/>
+  
+  <!-- Audio frequency bars representing different terms -->
+  <g opacity="0.7">
+    <!-- Low frequency bar -->
+    <rect x="20" y="45" width="3" height="25" fill="#10b981" rx="1.5">
+      <animate attributeName="height" values="25;30;25" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="45;40;45" dur="2s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Mid-low frequency bar -->
+    <rect x="28" y="40" width="3" height="35" fill="#f59e0b" rx="1.5">
+      <animate attributeName="height" values="35;40;35" dur="1.8s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="40;35;40" dur="1.8s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Mid frequency bar -->
+    <rect x="36" y="35" width="3" height="40" fill="#f59e0b" rx="1.5">
+      <animate attributeName="height" values="40;45;40" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="35;30;35" dur="1.5s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Mid-high frequency bar -->
+    <rect x="44" y="38" width="3" height="37" fill="#6366f1" rx="1.5">
+      <animate attributeName="height" values="37;42;37" dur="1.7s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="38;33;38" dur="1.7s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- High frequency bar -->
+    <rect x="52" y="42" width="3" height="30" fill="#6366f1" rx="1.5">
+      <animate attributeName="height" values="30;35;30" dur="1.9s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="42;37;42" dur="1.9s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- Ultra-high frequency bar -->
+    <rect x="60" y="48" width="3" height="22" fill="#6b7280" rx="1.5">
+      <animate attributeName="height" values="22;27;22" dur="2.1s" repeatCount="indefinite"/>
+      <animate attributeName="y" values="48;43;48" dur="2.1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Headphone/speaker icon element -->
+  <g transform="translate(65, 20)">
+    <!-- Speaker cone -->
+    <circle cx="8" cy="8" r="6" fill="none" stroke="#e0e0e0" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="8" cy="8" r="3" fill="#e0e0e0" opacity="0.4"/>
+    
+    <!-- Sound waves -->
+    <path d="M 16 5 Q 20 8, 16 11" stroke="#10b981" stroke-width="1.5" fill="none" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 18 3 Q 24 8, 18 13" stroke="#f59e0b" stroke-width="1.5" fill="none" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Terminology/text elements -->
+  <g opacity="0.3">
+    <!-- Stylized "A" for Audiophile -->
+    <path d="M 75 75 L 82 85 M 75 75 L 68 85 M 70 80 L 80 80" 
+          stroke="url(#primaryGradient)" 
+          stroke-width="2" 
+          stroke-linecap="round"/>
+  </g>
+  
+  <!-- Center dot representing the user/listener -->
+  <circle cx="50" cy="50" r="2" fill="url(#primaryGradient)" opacity="0.8">
+    <animate attributeName="r" values="2;3;2" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite"/>
+  </circle>
+</svg>
