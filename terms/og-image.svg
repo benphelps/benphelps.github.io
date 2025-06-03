@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Gradient definitions matching the app's color scheme -->
+    <linearGradient id="backgroundGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a1a;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="titleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:1" />
+    </linearGradient>
+
+    <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:0.6" />
+      <stop offset="33%" style="stop-color:#60a5fa;stop-opacity:0.6" />
+      <stop offset="66%" style="stop-color:#fbbf24;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#6b7280;stop-opacity:0.6" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#backgroundGradient)"/>
+
+  <!-- Subtle background elements -->
+  <circle cx="200" cy="150" r="100" fill="#10b981" opacity="0.03"/>
+  <circle cx="1000" cy="480" r="120" fill="#fbbf24" opacity="0.03"/>
+  <circle cx="600" cy="315" r="80" fill="#60a5fa" opacity="0.02"/>
+
+  <!-- Main title -->
+  <text x="600" y="165"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="64"
+        font-weight="bold"
+        text-anchor="middle"
+        fill="url(#titleGradient)">
+    Audiophile Terminology Guide
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="225"
+        font-family="system-ui, -apple-system, sans-serif"
+        font-size="32"
+        font-weight="normal"
+        text-anchor="middle"
+        fill="#a0a0a0">
+    Interactive reference for audio enthusiasts
+  </text>
+
+  <!-- Frequency visualization bars -->
+  <g transform="translate(385, 265)">
+    <!-- Low frequencies -->
+    <rect x="0" y="75" width="12" height="10" fill="#10b981" rx="6" opacity="0.4"/>
+    <rect x="25" y="70" width="12" height="20" fill="#10b981" rx="6" opacity="0.5"/>
+    <rect x="50" y="65" width="12" height="30" fill="#10b981" rx="6" opacity="0.6"/>
+    <rect x="75" y="55" width="12" height="50" fill="#10b981" rx="6" opacity="0.6"/>
+    <rect x="100" y="45" width="12" height="70" fill="#10b981" rx="6" opacity="0.7"/>
+    <rect x="125" y="40" width="12" height="80" fill="#10b981" rx="6" opacity="0.8"/>
+    <rect x="150" y="30" width="12" height="100" fill="#10b981" rx="6" opacity="0.7"/>
+    <rect x="175" y="20" width="12" height="120" fill="#60a5fa" rx="6" opacity="0.8"/>
+    <rect x="200" y="10" width="12" height="140" fill="#60a5fa" rx="6" opacity="0.9"/>
+
+    <!-- Mid frequencies -->
+    <rect x="225" y="5" width="12" height="150" fill="#60a5fa" rx="6" opacity="1"/>
+    <rect x="250" y="15" width="12" height="130" fill="#60a5fa" rx="6" opacity="0.9"/>
+    <rect x="275" y="25" width="12" height="110" fill="#60a5fa" rx="6" opacity="0.8"/>
+
+    <!-- High frequencies -->
+    <rect x="300" y="35" width="12" height="90" fill="#fbbf24" rx="6" opacity="0.8"/>
+    <rect x="325" y="45" width="12" height="70" fill="#fbbf24" rx="6" opacity="0.7"/>
+    <rect x="350" y="55" width="12" height="50" fill="#fbbf24" rx="6" opacity="0.6"/>
+
+    <!-- Ultra-high frequencies -->
+    <rect x="375" y="65" width="12" height="30" fill="#6b7280" rx="6" opacity="0.6"/>
+    <rect x="400" y="70" width="12" height="20" fill="#6b7280" rx="6" opacity="0.5"/>
+    <rect x="425" y="75" width="12" height="10" fill="#6b7280" rx="6" opacity="0.4"/>
+  </g>
+
+  <!-- Frequency response curve -->
+  <path d="M 200 365 Q 350 335, 500 355 Q 650 375, 800 345 Q 950 315, 1000 335"
+        stroke="url(#waveGradient)"
+        stroke-width="4"
+        fill="none"
+        opacity="0.8"/>
+
+  <!-- Category indicators -->
+  <g transform="translate(250, 465)">
+    <circle cx="0" cy="0" r="8" fill="#10b981"/>
+    <text x="20" y="6" font-family="system-ui, -apple-system, sans-serif"
+          font-size="18" fill="#10b981" font-weight="600">Positive Terms</text>
+
+    <circle cx="200" cy="0" r="8" fill="#60a5fa"/>
+    <text x="220" y="6" font-family="system-ui, -apple-system, sans-serif"
+          font-size="18" fill="#60a5fa" font-weight="600">Mixed Terms</text>
+
+    <circle cx="380" cy="0" r="8" fill="#fbbf24"/>
+    <text x="400" y="6" font-family="system-ui, -apple-system, sans-serif"
+          font-size="18" fill="#fbbf24" font-weight="600">Negative Terms</text>
+
+    <circle cx="580" cy="0" r="8" fill="#6b7280"/>
+    <text x="600" y="6" font-family="system-ui, -apple-system, sans-serif"
+          font-size="18" fill="#6b7280" font-weight="600">Neutral Terms</text>
+  </g>
+
+</svg>
