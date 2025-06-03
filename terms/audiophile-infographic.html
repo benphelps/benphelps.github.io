@@ -1,85 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Audiophile Terminology Guide</title>
-    <link rel="stylesheet" href="audiophile-infographic.css" />
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Audiophile Terminology Guide</h1>
-        <p class="subtitle">Interactive reference for audio enthusiasts</p>
-      </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Audiophile Terminology Guide</title>
+        <link rel="stylesheet" href="audiophile-infographic.css" />
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="https://rawcdn.githack.com/nextapps-de/flexsearch/0.7.1/dist/flexsearch.bundle.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <h1>Audiophile Terminology Guide</h1>
+                <p class="subtitle">
+                    Interactive reference for audio enthusiasts
+                </p>
+            </header>
 
-      <div class="controls">
-        <div class="search-box">
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search terms..."
-            autocomplete="off"
-          />
-        </div>
-        <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="positive">Positive</button>
-          <button class="filter-btn" data-filter="negative">Negative</button>
-          <button class="filter-btn" data-filter="neutral">Neutral</button>
-        </div>
-      </div>
+            <div class="controls">
+                <div class="search-box">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search terms..."
+                        autocomplete="off"
+                    />
+                </div>
+                <div class="filter-section">
+                    <div class="filter-buttons primary-filters">
+                        <button
+                            class="filter-btn active"
+                            data-filter="all"
+                            data-filter-type="primary"
+                        >
+                            All
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-filter="positive"
+                            data-filter-type="primary"
+                        >
+                            Positive
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-filter="negative"
+                            data-filter-type="primary"
+                        >
+                            Negative
+                        </button>
+                        <button
+                            class="filter-btn"
+                            data-filter="neutral"
+                            data-filter-type="primary"
+                        >
+                            Neutral
+                        </button>
+                    </div>
+                    <div class="filter-buttons subcategory-filters" id="subcategoryFilters">
+                        <!-- Subcategory buttons will be dynamically generated here -->
+                    </div>
+                </div>
+                <div class="filter-actions">
+                    <button class="clear-filters-btn" id="clearFilters">
+                        Clear All Filters
+                    </button>
+                </div>
+                <div class="results-counter" id="resultsCounter">
+                    Showing all terms
+                </div>
+            </div>
 
-      <!-- Frequency Chart Section -->
-      <section class="chart-section">
-        <h2>Frequency Relevancy Chart</h2>
-        <p class="chart-description">
-          This interactive chart plots audiophile terms by their primary
-          frequency relevance (X-axis, logarithmic scale) and sentiment polarity
-          (Y-axis). Circle size indicates relevance strength. Click any point to
-          view detailed term information. The teal line shows the Harman target
-          curve as a frequency response reference.
-        </p>
-        <div id="frequency-chart">
-          <!-- Chart will be dynamically generated here -->
-        </div>
-      </section>
+            <!-- Frequency Chart Section -->
+            <section class="chart-section">
+                <div id="frequency-chart">
+                    <!-- Chart will be dynamically generated here -->
+                </div>
 
-      <div class="terms-grid" id="termsGrid">
-        <!-- Terms will be dynamically inserted here -->
-      </div>
-    </div>
+                <p class="chart-description">
+                    This interactive chart plots audiophile terms by their
+                    primary frequency relevance (X-axis, logarithmic scale) and
+                    sentiment polarity (Y-axis). Circle size indicates relevance
+                    strength. Click any point to view detailed term information.
+                    The teal line shows the Harman target curve as a frequency
+                    response reference. Use the filters above to explore terms
+                    by sentiment category and specific subcategories like "Bass
+                    Character" or "Treble Character".
+                </p>
+                <div id="chart-tooltip" style="display: none"></div>
+            </section>
 
-    <!-- Modal -->
-    <div class="modal" id="termModal">
-      <div class="modal-content">
-        <button class="close-modal" onclick="closeModal()">×</button>
-        <div class="modal-header">
-          <h2 class="modal-title" id="modalTitle"></h2>
-          <div class="modal-categories" id="modalCategories"></div>
+            <div class="terms-grid" id="termsGrid">
+                <!-- Terms will be dynamically inserted here -->
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="modal-section">
-            <h3>Summary</h3>
-            <p id="modalSummary"></p>
-          </div>
-          <div class="modal-section">
-            <h3>Short Explanation</h3>
-            <p id="modalShort"></p>
-          </div>
-          <div class="modal-section">
-            <h3>Detailed Description</h3>
-            <p id="modalDetailed"></p>
-          </div>
-          <div class="modal-section">
-            <h3>Related Terms</h3>
-            <div class="related-terms" id="modalRelated"></div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <script src="audiophile-infographic.js"></script>
-  </body>
+        <!-- Modal -->
+        <div class="modal" id="termModal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeModal()">×</button>
+                <div class="modal-header">
+                    <h2 class="modal-title" id="modalTitle"></h2>
+                    <div class="modal-categories" id="modalCategories"></div>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-section">
+                        <h3>Summary</h3>
+                        <p id="modalSummary"></p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Short Explanation</h3>
+                        <p id="modalShort"></p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Detailed Description</h3>
+                        <p id="modalDetailed"></p>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Related Terms</h3>
+                        <div class="related-terms" id="modalRelated"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="harman.js"></script>
+        <script src="data.js"></script>
+        <script src="audiophile-infographic.js"></script>
+    </body>
 </html>
